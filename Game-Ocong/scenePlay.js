@@ -19,6 +19,9 @@ var scenePlay = new Phaser.Class({
     },
 
     create: function () {
+        const width = this.scale.width;
+        const height = this.scale.height;
+
         this.snd_dead = this.sound.add('snd_dead');
 
         this.snd_click = [];
@@ -35,7 +38,7 @@ var scenePlay = new Phaser.Class({
 
         this.isGameRunning = false;
 
-        this.chara = this.add.image(130, 768 / 2, 'chara');
+        this.chara = this.add.image(130, height / 2, 'chara');
         this.chara.setDepth(3);
         this.chara.setScale(0);
 
@@ -199,10 +202,12 @@ var scenePlay = new Phaser.Class({
 
             
             for (let i = this.halangan.length - 1; i >= 0; i--) {
-                if (this.chara.getBounds().contains(this.halangan[i].x, this.halangan[i].y)) {
+                const charaBounds = this.chara.getBounds();
+            const obstacleBounds = this.halangan[i].getBounds();
+            if (Phaser.Geom.Intersects.RectangleToRectangle(charaBounds, obstacleBounds)) {
                     this.isGameRunning = false;
                     this.snd_dead.play();
-                    if (this.charaTweens != null) {
+                    if (this.charaTweens) {
                         this.charaTweens.stop();
                     }
                     

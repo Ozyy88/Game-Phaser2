@@ -29,16 +29,19 @@ var sceneMenu = new Phaser.Class({
     },
 
     create() {
+        const width = this.scale.width;
+        const height = this.scale.height;
+
         X_POSITION = {
             LEFT: 0,
-            CENTER: game.canvas.width / 2,
-            RIGHT: game.canvas.width,
+            CENTER: width / 2,
+            RIGHT: width,
         };
 
         Y_POSITION = {
             TOP: 0,
-            CENTER: game.canvas.height / 2,
-            BOTTOM: game.canvas.height,
+            CENTER: height / 2,
+            BOTTOM: height,
         };
 
         this.add.image(X_POSITION.CENTER, Y_POSITION.CENTER, "bg_start");
@@ -52,9 +55,7 @@ var sceneMenu = new Phaser.Class({
 
         if (snd_ambience == null){
             snd_ambience = this.sound.add('snd_ambience');
-            snd_ambience.loop = true;
-            snd_ambience.setVolume(0.35);
-            snd_ambience.play();
+            snd_ambience.play({ loop: true, volume: 0.35 });
         }
 
         this.snd_touch = this.sound.add('snd_touch');
@@ -64,19 +65,19 @@ var sceneMenu = new Phaser.Class({
         let btnClicked = false;
 
         
-        var btnPlay = this.add.image(1024 / 2, 768 / 2 + 75, 'btn_play');
+        var btnPlay = this.add.image(width / 2, height / 2 + 75, 'btn_play');
         btnPlay.name = "btn_play";
-        btnPlay.setInteractive();
+        btnPlay.setInteractive({ useHandCursor: true });
         btnPlay.setScale(0);
 
         
-        this.titleGame = this.add.image(1024 / 2, 200, 'title_game');
+        this.titleGame = this.add.image(width / 2, 200, 'title_game');
         this.titleGame.setDepth(10);
         this.titleGame.setScale(0);
         this.titleGame.y -= 384;
 
         
-        var panelSkor = this.add.image(1024/2, 768-80, 'panel_skor');
+        var panelSkor = this.add.image(width / 2, height - 80, 'panel_skor');
         panelSkor.setOrigin(0.5);
         panelSkor.setDepth(10);
         panelSkor.setAlpha(0);
