@@ -58,7 +58,7 @@ var scenePlay = new Phaser.Class({
 
         this.score = 0;
 
-        this.panel_score = this.add.image(1024 / 2, 60, 'panel_skor');
+        this.panel_score = this.add.image(width / 2, 60, 'panel_skor');
         this.panel_score.setOrigin(0.5);
         this.panel_score.setDepth(10);
         this.panel_score.setAlpha(0.8);
